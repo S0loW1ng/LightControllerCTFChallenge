@@ -29,7 +29,7 @@ There has been rumors that the LED Matrix hides some secrets, can you find thenm
 - now ssh back to the server with the following: ssh elfie@10.8.0.8  : message Calderon for password 
 - cd to /home/elfie/LightControllerCTFChallenge
 - run the following command: source ./venv/bin/activate
-- finaly run the following command: python3 app.py
+- finaly run the following command: python3 app.py &
 - you will see and output like this 
 ```
  * Serving Flask app 'app'
