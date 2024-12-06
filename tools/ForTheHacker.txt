@@ -1,0 +1,7 @@
+If you found this congrats!
+
+There is no flag to hack the raspberry pi due to time constrain.
+
+Use the tools found here to make your own json file and make your own Pixel art
+
+Message Pve Calderon if you need help on making pixel art

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Tree Lights Control</title>
+    <style>
+        /* General Styles */
+        body {
+            background: url('https://images.unsplash.com/photo-1483086431886-3590a88317fe') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Add a control panel-style overlay */
+        .control-panel {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #FFD700;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        /* Christmas Lights on the Edges */
+        .lights {
+            position: fixed;
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+        }
+
+        /* Top and Bottom lights */
+        .lights-top, .lights-bottom {
+            width: 100%;
+            height: 20px;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .lights-top {
+            top: 0;
+            left: 0;
+        }
+
+        .lights-bottom {
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Left and Right lights */
+        .lights-left, .lights-right {
+            height: 100%;
+            width: 20px;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .lights-left {
+            top: 0;
+            left: 0;
+        }
+
+        .lights-right {
+            top: 0;
+            right: 0;
+        }
+
+        .lights span {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 5px;
+            animation: blink 1.5s infinite;
+        }
+
+        /* Light Colors */
+        .red { background: red; }
+        .green { background: green; animation-delay: 0.2s; }
+        .blue { background: blue; animation-delay: 0.4s; }
+        .yellow { background: yellow; animation-delay: 0.6s; }
+        .white { background: white; animation-delay: 0.8s; }
+
+        /* Blinking Effect */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Header and Text */
+        h1 {
+            font-size: 3em;
+            color: #FFD700;
+            margin: 0 0 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #FFFFFF;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF4500;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #FF6347;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Christmas Lights -->
+<div class="lights lights-top">
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+</div>
+<div class="lights lights-bottom">
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+</div>
+<div class="lights lights-left">
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+</div>
+<div class="lights lights-right">
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+    <span class="red"></span>
+    <span class="green"></span>
+    <span class="blue"></span>
+    <span class="yellow"></span>
+    <span class="white"></span>
+</div>
+
+<!-- Control Panel Content -->
+<div class="control-panel">
+    <h1>🎄 Welcome to The Control Panel!  🎄</h1>
+    <p>Spread some holiday cheer by controlling the lights on our Christmas Panel!</p>
+    <p>✨ If you are not authorized leave or you will be added to the n✨</p>
+</div>
+
+</body>
+</html>

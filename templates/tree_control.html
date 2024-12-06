@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Control</title>
+    <style>
+        /* Some elf reported that there is a way to leak the keys to our server
+        We want to investigate but Santa is not paying us enough to find it. */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url('https://images.unsplash.com/photo-1608889177864-6b563cd7122d') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .control-panel {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .output-box {
+            width: 80%;
+            max-width: 800px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: #222;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #32CD32;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .file-list {
+            margin: 20px 0;
+            padding: 10px;
+            height: 200px;
+            overflow-y: scroll;
+            background-color: #222;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+        }
+
+        .file-list div {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .file-list div:hover {
+            background-color: #FFD700;
+            color: #000;
+        }
+
+        .file-list div.selected {
+            background-color: #32CD32;
+            color: #fff;
+        }
+    </style>
+<script>
+    let selectedFile = null;
+
+    function populateFiles() {
+        fetch('/get_files')
+            .then(response => response.json())
+            .then(data => {
+                const fileList = document.getElementById("file-list");
+                fileList.innerHTML = ""; // Clear existing content
+                data.files.forEach(file => {
+                    const fileDiv = document.createElement("div");
+                    fileDiv.textContent = file;
+                    fileDiv.onclick = () => selectFile(fileDiv, file);
+                    fileList.appendChild(fileDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching files:', error));
+    }
+
+    function selectFile(element, fileName) {
+        const fileList = document.getElementById("file-list");
+        Array.from(fileList.children).forEach(child => child.classList.remove("selected"));
+        element.classList.add("selected");
+        selectedFile = fileName;
+    }
+
+    function displayFileContent() {
+        if (!selectedFile) {
+            alert("Please select a file first!");
+            return;
+        }
+
+        fetch('/run_command', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filepath: selectedFile })
+        })
+            .then(response => response.json())
+            .then(data => {
+                const outputBox = document.getElementById("output-box");
+                outputBox.textContent = data.output || "No content available.";
+            })
+            .catch(error => console.error('Error fetching file content:', error));
+    }
+
+    function sendPostToExternal() {
+        if (!selectedFile) {
+            alert("Please select a file first!");
+            return;
+        }
+
+        fetch('/send_to_external', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filepath: selectedFile })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(`Server responded: ${data.message}`);
+            })
+            .catch(error => console.error('Error sending file content to external server:', error));
+    }
+</script>
+
+
+</head>
+<body>
+
+<div class="control-panel">
+    <h2>🎄 File Manager 🎄</h2>
+    <button class="btn" onclick="populateFiles()">Populate</button>
+    <div id="file-list" class="file-list"></div>
+    <button class="btn" onclick="displayFileContent()">Display File Content</button>
+    <button class="btn" onclick="sendPostToExternal()">Send to 192.168.3.3:5000</button>
+</div>
+
+<div id="output-box" class="output-box">
+    <em>File content will be displayed here...</em>
+</div>
+
+</body>
+</html>
