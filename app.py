@@ -10,7 +10,7 @@ app.secret_key = "your_secret_key"
 
 # Store OTP for demo purposes
 otp_storage = {}
-FILE_FOLDER = "/home/elfie/app/jsonPics/"  # Replace with your actual folder path
+FILE_FOLDER = "/home/elfie/LightControllerCTFChallenge/jsonPics/"  # Replace with your actual folder path
 bannedWords = ["nc","python","bash","base64","<<<","<<", "&&","&","|","||"," ","/"]  # Example banned words
 #"pixel_art.json;cat${IFS}${PATH:0:1}home${PATH:0:1}elfie${PATH:0:1}.ssh${PATH:0:1}id_rsa" solution 
 
@@ -93,7 +93,7 @@ def execute_command_in_thread(filepath, output):
     """Threaded function to execute the ommand."""
     try:
         temp_output_file = "/tmp/output.txt"
-        command = f"cat /home/elfie/app/jsonPics/" + filepath + " > " + temp_output_file
+        command = f"cat /home/elfie/LightControllerCTFChallenge/jsonPics/" + filepath + " > " + temp_output_file
         print(command)
         os.system(command)
 
