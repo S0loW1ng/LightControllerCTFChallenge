@@ -12,7 +12,6 @@ app.secret_key = "your_secret_key"
 otp_storage = {}
 FILE_FOLDER = "/home/elfie/LightControllerCTFChallenge/jsonPics/"  # Replace with your actual folder path
 bannedWords = ["nc","python","bash","base64","<<<","<<", "&&","&","|","||"," ","/"]  # Example banned words
-#"pixel_art.json;cat${IFS}${PATH:0:1}home${PATH:0:1}elfie${PATH:0:1}.ssh${PATH:0:1}id_rsa" solution 
 
 
 def contains_banned_words(text, banned_words):

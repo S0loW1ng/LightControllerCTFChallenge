@@ -1,6 +1,6 @@
 ### README.md
 
-```markdown
+
 # Flask Application for File Management and External Posting
 
 This Flask application provides functionality for managing files in a specific directory, validating user input, and sending file content to an external server. It includes features like user authentication with OTP, file listing, file content display, and sending JSON content to a specified endpoint.
